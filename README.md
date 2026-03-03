@@ -1,73 +1,106 @@
-# React + TypeScript + Vite
+# 🏴‍☠️ One Piece Guesser
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full stack browser game built with React, TypeScript, and Supabase. Test your One Piece knowledge by guessing characters and locations from the anime
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## How to Play
 
-## React Compiler
+1. Choose a game mode - **Characters** or **Locations**
+2. An image will appear on screen
+3. Type your guess and hit **Submit**
+4. Find out if you were right and see your final score at the end
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+---
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Randomized question order every game so no two runs are run in the same order
+- Two game modes - Characters and Locations
+- Correct/incorrect feedback after every guess with the right answer revealed
+- Live score and question counter during gameplay
+- Final score screen at the end
+- Play Again without leaving the page
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Tech Stack
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+| Technology | Purpose |
+|---|---|
+| React + TypeScript | Frontend UI and game logic |
+| Vite | Build tool and dev server |
+| Tailwind CSS | Styling |
+| Supabase | Database and image storage |
+
+---
+
+## Getting Started
+
+### Prerequisites
+- Node.js installed
+- A Supabase account and project with `characters` and `locations` tables
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/one-piece-guesser.git
+
+# Navigate into the project
+cd one-piece-guesser
+
+# Install dependencies
+npm install
+
+# Start the dev server
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Then open your browser and go to `http://localhost:5173`
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Environment Variables
+
+Create a `.env` file in the root of the project with the following:
+
 ```
+VITE_SUPABASE_URL=your_supabase_project_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+You can find these in your Supabase dashboard under **Settings → API**.
+
+### Database Setup
+
+Create two tables in Supabase:
+
+**characters**
+| Column | Type |
+|---|---|
+| id | uuid (auto) |
+| name | text |
+| image | text |
+| crew | text |
+
+**locations**
+| Column | Type |
+|---|---|
+| id | uuid (auto) |
+| name | text |
+| image | text |
+| arc | text |
+
+Upload your images to a **public Supabase Storage bucket** and paste the public URLs into the `image` column of each table.
+
+---
+
+## Future Improvements
+
+- Countdown timer per question
+- Leaderboard using Supabase
+- Multiple choice mode
+- Devil Fruit guessing as a third game mode
+
+---
