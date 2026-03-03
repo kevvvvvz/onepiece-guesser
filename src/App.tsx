@@ -49,10 +49,10 @@ function App() {
     const renderScreen = () => {
       if (!gameState.isPlaying && gameState.mode) {
         return (
-          <div>
-            <h2>Game Over!</h2>
+          <div className="flex flex-col items-center justify-center min-h-screen">
+            <h2 className="text-mono text-2xl text-red-500">Game Over!</h2>
             <p>Your final score: {gameState.score}</p>
-            <button onClick={() => setGameState({
+            <button className="mt-6 text-white"onClick={() => setGameState({
               score: 0,
               currentIndex: 0,
               isPlaying: false,
@@ -67,9 +67,11 @@ function App() {
       }
       if (showFeedback) {
         return (
-          <div>
-            <h2>{isCorrect ? "Correct!" : "Wrong! The correct answer was: ${currentQuestion.name}"}</h2>
-            <button onClick={handleNext}>Next</button>
+          <div className="flex flex-col items-center justify-center min-h-screen">
+            <h2 className={isCorrect ? "text-green-500" : "text-red-500"}>
+              {isCorrect ? "Correct!" : `Wrong! The correct answer was: ${currentQuestion.name}`}
+            </h2>
+            <button className="mt-6 text-white" onClick={handleNext}>Next</button>
           </div>
         )
       }
@@ -83,7 +85,7 @@ function App() {
     }
 
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center min-h-screen font-mono text-2xl">
       <h1>One Piece Guesser</h1>
       {renderScreen()}
     </div>
